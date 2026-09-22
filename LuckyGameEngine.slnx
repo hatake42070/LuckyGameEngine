@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="LuckyGameEngine/LuckyGameEngine.vcxproj" />
+  <Project Path="LuckyGameEngine/LuckyGameEngine.vcxproj" Id="9a3f1147-cf41-4b10-8402-e40e2095bfd8" />
 </Solution>
