@@ -12,4 +12,4 @@ public:
 	virtual void Start() {}		// 初期化処理
 	virtual void Update() {}
 	virtual void Draw() {}		// 描画処理
-}
+};

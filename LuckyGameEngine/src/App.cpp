@@ -4,6 +4,9 @@
 #include "imgui_impl_win32.h"
 #include "imgui_impl_dx11.h"
 
+#include "CircleDrawComponent.h"
+#include "GameObject.h"
+
 // ImGuiのWin32メッセージハンドラを外部参照
 // 渡されたメッセージ（マウスやキーの操作情報）を読み解いて、ImGuiのボタンを押したり、ウィンドウを動かしたりするImGui専用の入力処理関数
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -52,6 +55,13 @@ bool App::Initialize()
 		return false;
 	}
 
+	player = new GameObject();
+	player->x = 640;
+	player->y = 360;
+	CircleDrawComponent* circleComp = new CircleDrawComponent();
+	circleComp->radius = 15;
+	player->AddComponent(circleComp);
+
 	// 全ての初期化が無事に突破できたらtrueを返す
 	return true;
 }
@@ -83,7 +93,8 @@ void App::Run()
 
 		// ---------- DxLibの描画 ----------
 		// ImGuiの裏側にDxLibの描画が行われるかテスト
-		DrawCircle(640, 360, 100, GetColor(255, 128, 0), TRUE);
+		//DrawCircle(640, 360, 100, GetColor(255, 128, 0), TRUE);
+		player->Draw();
 		// ---------------------------------
 
 		// 6. ImGuiの実際の描画をDirectX11経由で画面に書き込む

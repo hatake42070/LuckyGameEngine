@@ -1,8 +1,11 @@
 #pragma once
 
+class GameObject;
+
 class App
 {
 private:
+	GameObject* player;
 
 public:
 	bool Initialize();
