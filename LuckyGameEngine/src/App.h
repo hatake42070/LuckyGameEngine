@@ -1,11 +1,13 @@
 #pragma once
 
-class GameObject;
+//class GameObject;
+class Scene;
 
 class App
 {
 private:
-	GameObject* player;
+	//GameObject* player;
+	Scene* scene;
 
 public:
 	bool Initialize();

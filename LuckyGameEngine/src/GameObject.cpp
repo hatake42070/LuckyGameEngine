@@ -1,5 +1,9 @@
 #include "GameObject.h"
 
+GameObject::GameObject(float x, float y, float z) : x(x), y(y), z(z)
+{
+}
+
 void GameObject::AddComponent(Component* component)
 {
 	components.push_back(component);
