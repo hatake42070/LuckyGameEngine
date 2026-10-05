@@ -1,7 +1,8 @@
-#pragma once
+﻿#pragma once
 
 #include <vector>
 #include "Component.h"
+#include <memory>
 
 class GameObject
 {
@@ -11,9 +12,9 @@ public:
 		float y,
 		float z
 	);
-	float x, y, z;								// transformクラス作る？
-	std::vector<Component*> components;			// GameObjectsの持つコンポーネントリスト
-	void AddComponent(Component* component);	// コンポーネントを追加する関数
+	float x, y, z;								// transformクラス作る？	
+	std::vector<std::unique_ptr<Component>> components;
+	void AddComponent(std::unique_ptr<Component>);	// コンポーネントを追加する関数
 	void Start();
 	void Update();
 	void Draw();

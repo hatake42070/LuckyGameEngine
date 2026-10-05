@@ -1,11 +1,11 @@
-#pragma once
+﻿#pragma once
 
 class GameObject; // 前方宣言
 
 class Component
 {
 public:
-	GameObject* gameObject;
+	GameObject* gameObject = nullptr;
 
 	// #includeが少ないうちはこの中に処理を書く
 	virtual ~Component() {}

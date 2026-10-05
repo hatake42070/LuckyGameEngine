@@ -1,4 +1,4 @@
-#include "App.h"
+﻿#include "App.h"
 #include "DxLib.h"
 #include "imgui.h"
 #include "imgui_impl_win32.h"
@@ -24,6 +24,10 @@ LRESULT CALLBACK WndProcHook(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	}
 	return 0; // 処理しなかったメッセージはDxLib側に任せる
 }
+
+App::App() = default;
+
+App::~App() = default;
 
 // DxLibの初期化と，ImGuiの初期化
 bool App::Initialize()
@@ -58,13 +62,13 @@ bool App::Initialize()
 		return false;
 	}
 
-	scene = new Scene();
+	scene = std::make_unique<Scene>();
 	auto player = std::make_unique<GameObject>(640, 360, 0);
 	//player->x = 640;
 	//player->y = 360;
-	CircleDrawComponent* circleComp = new CircleDrawComponent();
+	auto circleComp = std::make_unique<CircleDrawComponent>();
 	circleComp->radius = 15;
-	player->AddComponent(circleComp);
+	player->AddComponent(std::move(circleComp));
 	scene->AddGameObject(std::move(player));
 	scene->Start();
 

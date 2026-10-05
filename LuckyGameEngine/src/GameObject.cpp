@@ -1,18 +1,18 @@
-#include "GameObject.h"
+﻿#include "GameObject.h"
 
 GameObject::GameObject(float x, float y, float z) : x(x), y(y), z(z)
 {
 }
 
-void GameObject::AddComponent(Component* component)
+void GameObject::AddComponent(std::unique_ptr<Component> component)
 {
-	components.push_back(component);
 	component->gameObject = this;
+	components.push_back(std::move(component));
 }
 
 void GameObject::Start()
 {
-	for (Component* component : components)
+	for (std::unique_ptr<Component>& component : components)
 	{
 		component->Start();
 	}
@@ -20,7 +20,7 @@ void GameObject::Start()
 
 void GameObject::Update()
 {
-	for (Component* component : components)
+	for (std::unique_ptr<Component>& component : components)
 	{
 		component->Update();
 	}
@@ -28,7 +28,7 @@ void GameObject::Update()
 
 void GameObject::Draw()
 {
-	for (Component* component : components)
+	for (std::unique_ptr<Component>& component : components)
 	{
 		component->Draw();
 	}
