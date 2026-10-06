@@ -158,7 +158,9 @@
     <ClCompile Include="src\CircleDrawComponent.cpp" />
     <ClCompile Include="src\Component.cpp" />
     <ClCompile Include="src\GameObject.cpp" />
+    <ClCompile Include="src\InputManager.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\PlayerController.cpp" />
     <ClCompile Include="src\Scene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -178,7 +180,10 @@
     <ClInclude Include="src\CircleDrawComponent.h" />
     <ClInclude Include="src\Component.h" />
     <ClInclude Include="src\GameObject.h" />
+    <ClInclude Include="src\InputManager.h" />
+    <ClInclude Include="src\PlayerController.h" />
     <ClInclude Include="src\Scene.h" />
+    <ClInclude Include="src\UpdateContext.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

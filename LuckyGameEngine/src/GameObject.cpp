@@ -1,4 +1,5 @@
 ﻿#include "GameObject.h"
+#include "UpdateContext.h"
 
 GameObject::GameObject(float x, float y, float z) : x(x), y(y), z(z)
 {
@@ -18,11 +19,11 @@ void GameObject::Start()
 	}
 }
 
-void GameObject::Update()
+void GameObject::Update(const UpdateContext& context)
 {
 	for (std::unique_ptr<Component>& component : components)
 	{
-		component->Update();
+		component->Update(context);
 	}
 }
 

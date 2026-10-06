@@ -1,9 +1,10 @@
-#pragma once
+﻿#pragma once
 
 #include <vector>
 #include <memory>
 
 class GameObject;
+struct UpdateContext;
 
 class Scene
 {
@@ -14,6 +15,6 @@ public:
 	~Scene();
 	void AddGameObject(std::unique_ptr<GameObject> gameObject);
 	void Start();
-	void Update();
+	void Update(const UpdateContext& context);
 	void Draw();
 };

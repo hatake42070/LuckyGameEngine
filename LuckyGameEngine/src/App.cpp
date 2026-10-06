@@ -9,6 +9,8 @@
 #include "Scene.h"
 #include <memory>
 #include <utility>
+#include "PlayerController.h"
+#include "InputManager.h"
 
 // ImGuiのWin32メッセージハンドラを外部参照
 // 渡されたメッセージ（マウスやキーの操作情報）を読み解いて、ImGuiのボタンを押したり、ウィンドウを動かしたりするImGui専用の入力処理関数
@@ -62,13 +64,17 @@ bool App::Initialize()
 		return false;
 	}
 
+	inputManager = std::make_unique<InputManager>();
+	updateContext.inputManager = inputManager.get();
 	scene = std::make_unique<Scene>();
-	auto player = std::make_unique<GameObject>(640, 360, 0);
+	auto player = std::make_unique<GameObject>(640.0f, 360.0f, 0.0f);
 	//player->x = 640;
 	//player->y = 360;
 	auto circleComp = std::make_unique<CircleDrawComponent>();
 	circleComp->radius = 15;
+	auto playerController = std::make_unique<PlayerController>();
 	player->AddComponent(std::move(circleComp));
+	player->AddComponent(std::move(playerController));
 	scene->AddGameObject(std::move(player));
 	scene->Start();
 
@@ -78,13 +84,21 @@ bool App::Initialize()
 
 void App::Run()
 {
+	previousTime = GetNowHiPerformanceCount();
 	// メインループ
 	// ESCキーで終了するように設定
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
 	{
 		ClearDrawScreen(); // 前フレームで描いた絵（裏画面）を真っ黒に塗りつぶして，新たなキャンバスを用意する
 
-		scene->Update();
+		inputManager->Update();	// キーの入力を更新
+
+		currentTime = GetNowHiPerformanceCount();
+		deltaTime = (currentTime - previousTime) / 1000000.0f;	// 1秒 = 1,000,000マイクロ秒
+		previousTime = currentTime;
+		updateContext.deltaTime = deltaTime;
+
+		scene->Update(updateContext);
 
 		// ImGuiのフレーム開始
 		ImGui_ImplDX11_NewFrame(); // DirectX側の準備

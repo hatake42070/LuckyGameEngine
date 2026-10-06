@@ -1,6 +1,7 @@
-#include "Scene.h"
+﻿#include "Scene.h"
 #include <utility>
 #include "GameObject.h"
+#include "UpdateContext.h"
 
 Scene::~Scene() = default;
 
@@ -17,11 +18,11 @@ void Scene::Start()
 	}
 }
 
-void Scene::Update()
+void Scene::Update(const UpdateContext& context)
 {
 	for (auto& gameObject : gameObjects)
 	{
-		gameObject->Update();
+		gameObject->Update(context);
 	}
 }
 

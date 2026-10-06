@@ -4,6 +4,8 @@
 #include "Component.h"
 #include <memory>
 
+struct UpdateContext;
+
 class GameObject
 {
 public:
@@ -16,6 +18,6 @@ public:
 	std::vector<std::unique_ptr<Component>> components;
 	void AddComponent(std::unique_ptr<Component>);	// コンポーネントを追加する関数
 	void Start();
-	void Update();
+	void Update(const UpdateContext& context);
 	void Draw();
 };
