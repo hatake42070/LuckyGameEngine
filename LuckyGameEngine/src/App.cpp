@@ -10,7 +10,7 @@
 #include <memory>
 #include <utility>
 #include "PlayerController.h"
-#include "InputManager.h"
+#include "InputSystem.h"
 
 // ImGuiのWin32メッセージハンドラを外部参照
 // 渡されたメッセージ（マウスやキーの操作情報）を読み解いて、ImGuiのボタンを押したり、ウィンドウを動かしたりするImGui専用の入力処理関数
@@ -64,8 +64,9 @@ bool App::Initialize()
 		return false;
 	}
 
-	inputManager = std::make_unique<InputManager>();
-	updateContext.inputManager = inputManager.get();
+	inputSystem = std::make_unique<InputSystem>();
+	inputSystem->Initialize();
+	updateContext.input = &inputSystem->GetInput();	// なぜ&
 	scene = std::make_unique<Scene>();
 	auto player = std::make_unique<GameObject>(640.0f, 360.0f, 0.0f);
 	//player->x = 640;
@@ -91,7 +92,7 @@ void App::Run()
 	{
 		ClearDrawScreen(); // 前フレームで描いた絵（裏画面）を真っ黒に塗りつぶして，新たなキャンバスを用意する
 
-		inputManager->Update();	// キーの入力を更新
+		inputSystem->Update();	// キーの入力を更新
 
 		currentTime = GetNowHiPerformanceCount();
 		deltaTime = (currentTime - previousTime) / 1000000.0f;	// 1秒 = 1,000,000マイクロ秒

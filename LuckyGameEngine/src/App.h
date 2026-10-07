@@ -4,7 +4,7 @@
 
 //class GameObject;
 class Scene;
-class InputManager;
+class InputSystem;
 
 class App
 {
@@ -14,7 +14,7 @@ private:
 	long long previousTime = 0;
 	long long currentTime = 0;
 	float deltaTime = 0;
-	std::unique_ptr<InputManager> inputManager;
+	std::unique_ptr<InputSystem> inputSystem;
 	UpdateContext updateContext;
 
 public:

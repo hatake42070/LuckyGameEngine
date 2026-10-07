@@ -1,9 +1,9 @@
 ﻿#pragma once
 
-class InputManager;
+class Input;
 
 struct UpdateContext
 {
 	float deltaTime = 0.0f;
-	InputManager* inputManager = nullptr;
+	const Input* input = nullptr;
 };
