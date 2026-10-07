@@ -70,6 +70,8 @@
   <ItemGroup>
     <None Include="..\.gitignore" />
     <None Include="AGENTS.md" />
+    <None Include="vcpkg.json" />
+    <None Include="vcpkg-configuration.json" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="External\imgui\imconfig.h">

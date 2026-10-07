@@ -1,13 +1,21 @@
 ﻿#include "InputSystem.h"
 #include "Key.h"
 #include <DxLib.h>
+#include <nlohmann/json.hpp>
 
 void InputSystem::Initialize()
 {
-	input.SetDxLibCode(Key::W, KEY_INPUT_W);
-	input.SetDxLibCode(Key::A, KEY_INPUT_A);
-	input.SetDxLibCode(Key::S, KEY_INPUT_S);
-	input.SetDxLibCode(Key::D, KEY_INPUT_D);
+	// ↓ 2. テスト用：コード内で小さなJSONデータを作ってみる
+	nlohmann::json testJson = { {"W", KEY_INPUT_W} };
+	int wCode = testJson["W"].get<int>();
+
+	// 取り出した数値(wCode)を実際にセットしてみる
+	input.SetDxLibCode(Key::W, wCode);
+
+	//input.SetDxLibCode(Key::W, KEY_INPUT_W);
+	//input.SetDxLibCode(Key::A, KEY_INPUT_A);
+	//input.SetDxLibCode(Key::S, KEY_INPUT_S);
+	//input.SetDxLibCode(Key::D, KEY_INPUT_D);
 }
 
 void InputSystem::Update()

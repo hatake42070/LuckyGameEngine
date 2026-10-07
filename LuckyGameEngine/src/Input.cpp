@@ -1,4 +1,5 @@
 ﻿#include "Input.h"
+#include "Key.h"
 
 // 押されているか（押しっぱなし判定）
 bool Input::IsKeyHeld(Key key) const
